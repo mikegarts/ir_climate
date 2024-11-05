@@ -17,8 +17,8 @@ from homeassistant.const import (
     ATTR_TEMPERATURE,
     CONF_NAME,
     PRECISION_WHOLE,
-    TEMP_CELSIUS,
     Platform,
+    UnitOfTemperature,
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -80,7 +80,7 @@ class FujitsuClimate(ClimateEntity):
     """Representation of a Fujitsu AC Climate device."""
 
     _attr_has_entity_name = True
-    _attr_temperature_unit = TEMP_CELSIUS
+    _attr_temperature_unit = UnitOfTemperature.CELSIUS
     _attr_precision = PRECISION_WHOLE
     _attr_supported_features = (
         ClimateEntityFeature.TARGET_TEMPERATURE
