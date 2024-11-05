@@ -1,0 +1,51 @@
+{
+    "title": "Fujitsu AC IR Climate",
+    "config": {
+        "title": "Fujitsu AC MQTT Climate",
+        "step": {
+            "user": {
+                "title": "Configure IR Climate Control",
+                "description": "Set up your Fujitsu AC IR climate control via MQTT",
+                "data": {
+                    "name": "Name of the climate device",
+                    "topic": "MQTT Topic for commands",
+                    "qos": "MQTT QOS (0, 1, or 2)",
+                    "retain": "MQTT Retain messages"
+                }
+            }
+        },
+        "error": {
+            "invalid_topic": "Invalid MQTT topic format",
+            "cannot_connect": "Failed to connect to MQTT broker",
+            "unknown": "Unexpected error occurred"
+        },
+        "abort": {
+            "already_configured": "Device is already configured"
+        }
+    },
+    "entity": {
+        "climate": {
+            "ir_climate": {
+                "state_attributes": {
+                    "fan_mode": {
+                        "state": {
+                            "auto": "Auto",
+                            "low": "Low",
+                            "medium": "Medium",
+                            "high": "High"
+                        }
+                    },
+                    "swing_mode": {
+                        "state": {
+                            "Auto": "Auto",
+                            "Off": "Off",
+                            "Bottom": "Bottom",
+                            "Mid": "Middle",
+                            "Top": "Top"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
