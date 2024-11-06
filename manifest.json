@@ -1,7 +1,7 @@
 {
   "domain": "ir_climate",
   "name": "Fujitsu AC MQTT Climate",
-  "documentation": "https://github.com/home-assistant/example-custom-config/tree/master/custom_components/ir_climate",
+  "documentation": "https://github.com/mikegarts/ir_climate",
   "dependencies": ["mqtt"],
   "codeowners": [],
   "requirements": [],
