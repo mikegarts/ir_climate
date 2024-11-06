@@ -2,13 +2,12 @@
 import logging
 import voluptuous as vol
 import json
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from homeassistant.components.climate import (
     ClimateEntity,
     PLATFORM_SCHEMA,
     HVACMode,
-    HVACAction,
     ClimateEntityFeature,
 )
 from homeassistant.components.mqtt.const import CONF_TOPIC
@@ -17,10 +16,9 @@ from homeassistant.const import (
     ATTR_TEMPERATURE,
     CONF_NAME,
     PRECISION_WHOLE,
-    Platform,
     UnitOfTemperature,
 )
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 import homeassistant.helpers.config_validation as cv
@@ -54,10 +52,13 @@ MODE_MAPPING = {
 REVERSE_MODE_MAPPING = {v: k for k, v in MODE_MAPPING.items()}
 
 FAN_MAPPING = {
-    "auto": "Auto",
-    "low": "1",
-    "medium": "2",
-    "high": "3",
+    "Auto": "Auto",
+    "Min": "1",
+    "low": "2",
+    "Medium": "3",
+    "Med-High":"4",
+    "High":"5",
+    "Max":"6"
 }
 
 SWING_MODES = ["Auto", "Off", "Bottom", "Mid", "Top"]
@@ -86,6 +87,8 @@ class FujitsuClimate(ClimateEntity):
         ClimateEntityFeature.TARGET_TEMPERATURE
         | ClimateEntityFeature.FAN_MODE
         | ClimateEntityFeature.SWING_MODE
+        | ClimateEntityFeature.TURN_ON
+        | ClimateEntityFeature.TURN_OFF
     )
     _attr_hvac_modes = [
         HVACMode.OFF,
@@ -166,6 +169,7 @@ class FujitsuClimate(ClimateEntity):
                 "SwingV": self._attr_swing_mode,
                 "SwingH": "Off",
                 "Quiet": "On" if self._quiet_mode else "Off",
+                "Econo":"On"
             }
 
             await mqtt.async_publish(

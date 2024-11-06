@@ -29,10 +29,13 @@
                 "state_attributes": {
                     "fan_mode": {
                         "state": {
-                            "auto": "Auto",
+                            "Auto": "Auto",
+                            "Min": "Minimum",
                             "low": "Low",
-                            "medium": "Medium",
-                            "high": "High"
+                            "Medium": "Medium",
+                            "Med-High": "Medium High",
+                            "High": "High",
+                            "Max": "Maximum"
                         }
                     },
                     "swing_mode": {
